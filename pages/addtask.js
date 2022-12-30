@@ -1,12 +1,15 @@
-import { TextField } from "@mui/material";
+
+import FormControl from '@mui/material/FormControl';
+import Head from 'next/head';
 
 const addtask = () => {
     return (
         <div>
-            <TextField label="fullWidth" id="fullWidth" />
-            <TextField label="fullWidth" id="fullWidth" />
-            <TextField label="fullWidth" id="fullWidth" />
-            <TextField label="fullWidth" id="fullWidth" />
+            <Head><title>Add task</title></Head>
+            <FormControl>
+
+            </FormControl>
+
         </div>
     );
 };

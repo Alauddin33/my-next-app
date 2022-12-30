@@ -8,12 +8,10 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Link from 'next/link';
-import { spacing } from '@mui/system';
+
 
 
 
@@ -75,6 +73,9 @@ function ResponsiveAppBar() {
                                 display: { xs: 'block', md: 'none' },
                             }}
                         >
+                            <Link href='/'><MenuItem onClick={handleCloseNavMenu}>
+                                <Typography textAlign="center">home</Typography>
+                            </MenuItem></Link>
                             {pages.map((page) => (
                                 <Link key={page} href={`/${page}`}>
                                     <MenuItem onClick={handleCloseNavMenu}>
@@ -87,7 +88,12 @@ function ResponsiveAppBar() {
                     </Box>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-
+                        <Link href='/' ><Button
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'white', display: 'block', }}
+                        >
+                            home
+                        </Button></Link>
                         {pages.map((page) => (
                             <Link key={page} href={`/${page}`}>
                                 <Button
@@ -101,8 +107,18 @@ function ResponsiveAppBar() {
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
-                        <Link href='/login'>Login</Link>
-                        <Link href='/register'>Register</Link>
+                        <Link href='/login'><Button
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'white', }}
+                        >
+                            login
+                        </Button></Link>
+                        <Link href='/register'><Button
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'white', }}
+                        >
+                            register
+                        </Button></Link>
                     </Box>
                 </Toolbar>
             </Container>
