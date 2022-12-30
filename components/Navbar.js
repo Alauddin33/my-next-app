@@ -11,6 +11,7 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import Link from 'next/link';
+import { useSession, signOut } from "next-auth/react"
 
 
 
@@ -20,6 +21,7 @@ const pages = ['addtask', 'mytask', 'completedtask'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
+    const { data: session } = useSession()
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -73,11 +75,11 @@ function ResponsiveAppBar() {
                                 display: { xs: 'block', md: 'none' },
                             }}
                         >
-                            <Link href='/'><MenuItem onClick={handleCloseNavMenu}>
+                            <Link href='/' style={{ textDecoration: 'none' }}><MenuItem onClick={handleCloseNavMenu}>
                                 <Typography textAlign="center">home</Typography>
                             </MenuItem></Link>
                             {pages.map((page) => (
-                                <Link key={page} href={`/${page}`}>
+                                <Link key={page} href={`/${page}`} style={{ textDecoration: 'none' }}>
                                     <MenuItem onClick={handleCloseNavMenu}>
                                         <Typography textAlign="center">{page}</Typography>
                                     </MenuItem>
@@ -88,14 +90,14 @@ function ResponsiveAppBar() {
                     </Box>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        <Link href='/' ><Button
+                        <Link href='/' style={{ textDecoration: 'none' }} ><Button
                             onClick={handleCloseNavMenu}
                             sx={{ my: 2, color: 'white', display: 'block', }}
                         >
                             home
                         </Button></Link>
                         {pages.map((page) => (
-                            <Link key={page} href={`/${page}`}>
+                            <Link key={page} href={`/${page}`} style={{ textDecoration: 'none' }}>
                                 <Button
                                     onClick={handleCloseNavMenu}
                                     sx={{ my: 2, color: 'white', display: 'block', }}
@@ -106,20 +108,33 @@ function ResponsiveAppBar() {
                         ))}
                     </Box>
 
-                    <Box sx={{ flexGrow: 0 }}>
-                        <Link href='/login'><Button
-                            onClick={handleCloseNavMenu}
-                            sx={{ my: 2, color: 'white', }}
-                        >
-                            login
-                        </Button></Link>
-                        <Link href='/register'><Button
-                            onClick={handleCloseNavMenu}
-                            sx={{ my: 2, color: 'white', }}
-                        >
-                            register
-                        </Button></Link>
-                    </Box>
+
+                    {session ? <>
+                        Signed in as {session.user.email} <br />
+                        <button onClick={() => signOut()}>Sign out</button>
+                    </>
+
+                        :
+
+                        <>
+
+                            <Box sx={{ flexGrow: 0 }}>
+                                <Link href='/login' style={{ textDecoration: 'none' }}><Button
+
+                                    onClick={handleCloseNavMenu}
+                                    sx={{ my: 2, color: 'white', }}
+                                >
+                                    login
+                                </Button></Link>
+                                <Link href='/register' style={{ textDecoration: 'none' }}><Button
+                                    onClick={handleCloseNavMenu}
+                                    sx={{ my: 2, color: 'white', }}
+                                >
+                                    register
+                                </Button></Link>
+                            </Box>
+                        </>
+                    }
                 </Toolbar>
             </Container>
         </AppBar>

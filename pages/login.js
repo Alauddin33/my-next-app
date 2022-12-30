@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Head from 'next/head';
+import { signIn } from "next-auth/react"
 
 function Copyright(props) {
     return (
@@ -84,6 +85,7 @@ export default function SignIn() {
                             label="Remember me"
                         />
                         <Button
+                            onClick={() => signIn()}
                             type="submit"
                             fullWidth
                             variant="contained"
